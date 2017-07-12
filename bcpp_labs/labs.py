@@ -71,4 +71,4 @@ lab_profile.add_panel(rdb_panel)
 
 site_labs.register(
     lab_profile=lab_profile,
-    requisition_model='bcpp_subject.subvjectrequisition')
+    requisition_model='bcpp_subject.subjectrequisition')
