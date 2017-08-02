@@ -1,5 +1,6 @@
+from bcpp_subject_form_validators import MICROTUBE
+
 RESEARCH_BLOOD_DRAW = 'Research Blood Draw'
-MICROTUBE = 'Microtube'
 VIRAL_LOAD = 'Viral Load'
 ELISA = 'ELISA'
 VENOUS = 'venous'
