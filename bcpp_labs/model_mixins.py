@@ -1,5 +1,5 @@
+from bcpp_status import StatusHelper
 from django.db import models
-
 from edc_lab.model_mixins.requisition import RequisitionIdentifierMixin
 from edc_lab.model_mixins.requisition import RequisitionModelMixin, RequisitionStatusMixin
 from edc_map.site_mappers import site_mappers
@@ -15,13 +15,27 @@ class Manager(VisitTrackingCrfModelManager, SearchSlugManager):
     pass
 
 
+class MyUpdatesRequisitionMetadataModelMixin(UpdatesRequisitionMetadataModelMixin):
+
+    status_helper_cls = StatusHelper
+
+    def run_metadata_rules_for_crf(self):
+        """Runs all the rule groups for this app label.
+
+        Gets called in the signal.
+        """
+        self.status_helper_cls(visit=self.visit, update_history=True)
+        self.visit.run_metadata_rules(visit=self.visit)
+
+    class Meta:
+        abstract = True
+
+
 class SubjectRequisitionModelMixin(
         RequisitionModelMixin, RequisitionStatusMixin, RequisitionIdentifierMixin,
         VisitTrackingCrfModelMixin, OffstudyMixin,
         PreviousVisitModelMixin,
-        UpdatesRequisitionMetadataModelMixin, models.Model):
-
-    # subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
+        MyUpdatesRequisitionMetadataModelMixin, models.Model):
 
     objects = Manager()
 
@@ -33,6 +47,7 @@ class SubjectRequisitionModelMixin(
     def get_search_slug_fields(self):
         fields = [
             'requisition_identifier',
+            'subject_identifier',
             'human_readable_identifier',
             'panel_name',
             'panel_object.abbreviation',
