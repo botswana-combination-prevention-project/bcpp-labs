@@ -23,10 +23,10 @@ class MyUpdatesRequisitionMetadataModelMixin(UpdatesRequisitionMetadataModelMixi
     def run_metadata_rules_for_crf(self):
         """Runs all the rule groups for this app label.
 
-        Gets called in the signal.
+        Inserts a call to the status helper.
         """
         self.status_helper_cls(visit=self.visit, update_history=True)
-        self.visit.run_metadata_rules(visit=self.visit)
+        super().run_metadata_rules_for_crf()
 
     class Meta:
         abstract = True
