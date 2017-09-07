@@ -5,6 +5,7 @@ from edc_lab.model_mixins.requisition import RequisitionModelMixin, RequisitionS
 from edc_map.site_mappers import site_mappers
 from edc_metadata.model_mixins.updates import UpdatesRequisitionMetadataModelMixin
 from edc_offstudy.model_mixins import OffstudyMixin
+from edc_reference.model_mixins import ReferenceModelMixin
 from edc_search.model_mixins import SearchSlugManager
 from edc_visit_tracking.managers import CrfModelManager as VisitTrackingCrfModelManager
 from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfModelMixin
@@ -22,10 +23,10 @@ class MyUpdatesRequisitionMetadataModelMixin(UpdatesRequisitionMetadataModelMixi
     def run_metadata_rules_for_crf(self):
         """Runs all the rule groups for this app label.
 
-        Gets called in the signal.
+        Inserts a call to the status helper.
         """
         self.status_helper_cls(visit=self.visit, update_history=True)
-        self.visit.run_metadata_rules(visit=self.visit)
+        super().run_metadata_rules_for_crf()
 
     class Meta:
         abstract = True
@@ -34,7 +35,7 @@ class MyUpdatesRequisitionMetadataModelMixin(UpdatesRequisitionMetadataModelMixi
 class SubjectRequisitionModelMixin(
         RequisitionModelMixin, RequisitionStatusMixin, RequisitionIdentifierMixin,
         VisitTrackingCrfModelMixin, OffstudyMixin,
-        PreviousVisitModelMixin,
+        PreviousVisitModelMixin, ReferenceModelMixin,
         MyUpdatesRequisitionMetadataModelMixin, models.Model):
 
     objects = Manager()
