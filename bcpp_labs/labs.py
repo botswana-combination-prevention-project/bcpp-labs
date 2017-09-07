@@ -3,6 +3,7 @@ from edc_lab.site_labs import site_labs
 from edc_lab.lab.processing_profile import Process
 
 from .constants import RESEARCH_BLOOD_DRAW, MICROTUBE, VIRAL_LOAD, ELISA
+from bcpp_labs.constants import VENOUS
 
 
 lab_profile = LabProfile(name='bcpp_subject')
@@ -47,13 +48,13 @@ elisa_panel = RequisitionPanel(
     processing_profile=elisa_processing)
 lab_profile.add_panel(elisa_panel)
 
-venous_processing = ProcessingProfile(name='venous', aliquot_type=wb)
+venous_processing = ProcessingProfile(name=VENOUS, aliquot_type=wb)
 venous_pl_process = Process(aliquot_type=pl, aliquot_count=2)
 venous_bc_process = Process(aliquot_type=bc, aliquot_count=1)
 venous_processing.add_processes(venous_pl_process, venous_bc_process)
 
 venous_panel = RequisitionPanel(
-    name='Venous (HIV)',
+    name=VENOUS,
     aliquot_type=wb,
     processing_profile=venous_processing)
 lab_profile.add_panel(venous_panel)
