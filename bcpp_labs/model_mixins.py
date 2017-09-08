@@ -6,7 +6,7 @@ from edc_map.site_mappers import site_mappers
 from edc_metadata.model_mixins.updates import UpdatesRequisitionMetadataModelMixin
 from edc_offstudy.model_mixins import OffstudyMixin
 from edc_reference.model_mixins import RequisitionReferenceModelMixin
-from edc_search.model_mixins import SearchSlugManager
+from edc_search.model_mixins import SearchSlugModelMixin, SearchSlugManager
 from edc_visit_tracking.managers import CrfModelManager as VisitTrackingCrfModelManager
 from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfModelMixin
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
@@ -36,7 +36,7 @@ class SubjectRequisitionModelMixin(
         RequisitionModelMixin, RequisitionStatusMixin, RequisitionIdentifierMixin,
         VisitTrackingCrfModelMixin, OffstudyMixin,
         PreviousVisitModelMixin, RequisitionReferenceModelMixin,
-        MyUpdatesRequisitionMetadataModelMixin, models.Model):
+        MyUpdatesRequisitionMetadataModelMixin, SearchSlugModelMixin, models.Model):
 
     objects = Manager()
 
