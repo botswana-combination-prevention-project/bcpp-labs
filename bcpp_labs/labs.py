@@ -22,6 +22,7 @@ viral_load_processing.add_processes(vl_pl_process, vl_bc_process)
 
 viral_load_panel = RequisitionPanel(
     name=VIRAL_LOAD,
+    abbreviation='VL',
     aliquot_type=wb,
     processing_profile=viral_load_processing)
 lab_profile.add_panel(viral_load_panel)
@@ -33,6 +34,7 @@ microtube_processing.add_processes(microtube_pl_process, microtube_bc_process)
 
 microtube_panel = RequisitionPanel(
     name=MICROTUBE,
+    abbreviation='MIP',
     aliquot_type=wb,
     processing_profile=microtube_processing)
 lab_profile.add_panel(microtube_panel)
@@ -65,6 +67,7 @@ rdb_processing.add_processes(rdb_pl_process, rdb_bc_process)
 
 rdb_panel = RequisitionPanel(
     name=RESEARCH_BLOOD_DRAW,
+    abbreviation='RBD',
     aliquot_type=wb,
     processing_profile=rdb_processing)
 lab_profile.add_panel(rdb_panel)
