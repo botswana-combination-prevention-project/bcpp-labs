@@ -34,7 +34,7 @@ microtube_processing.add_processes(microtube_pl_process, microtube_bc_process)
 
 microtube_panel = RequisitionPanel(
     name=MICROTUBE,
-    abbreviation='MIP',
+    abbreviation='MAP',
     aliquot_type=wb,
     processing_profile=microtube_processing)
 lab_profile.add_panel(microtube_panel)
